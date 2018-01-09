@@ -1,3 +1,5 @@
+#pragma once
+
 class Tetra {
   public:
     Tetra(short u, short r, short d, short l)
