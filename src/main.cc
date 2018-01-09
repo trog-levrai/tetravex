@@ -12,10 +12,11 @@ int main(int argc, char** argv) {
   for (size_t i = 0; i < s; ++i) {
     grid.push_back(std::vector<Tetra>());
     for (size_t j = 0; j < s; ++j) {
-      grid[i].push_back(Tetra(1, 2, 3, 4));
+      grid[i].push_back(Tetra(1, 1, 3, 1));
     }
   }
   auto g = Grid(grid);
   g.print();
+  std::cout << g.get_err() << std::endl;
   return 0;
 }

@@ -23,3 +23,20 @@ void Grid::print() const {
     std::cout << std::endl;
   }
 }
+
+size_t Grid::get_err() const {
+  size_t ans = 0;
+
+  //Counting errors for columns
+  for (size_t i = 0; i < grid_.size(); ++i) {
+    for (size_t j = 0; j < grid_.size() - 1; ++j)
+      ans += grid_[i][j].down == grid_[i][j + 1].up ? 0 : 1;
+  }
+
+  //Counting errors for rows
+  for (size_t i = 0; i < grid_.size() - 1; ++i) {
+    for (size_t j = 0; j < grid_.size(); ++j)
+      ans += grid_[i][j].right == grid_[i + 1][j].left ? 0 : 1;
+  }
+  return ans;
+}
