@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <math.h>
 
 #include "grid.hh"
 
@@ -17,18 +18,38 @@ Grid read_grid(size_t s, std::string path) {
   return Grid(grid);
 }
 
+bool temp_test(double temp, size_t diff) {
+  double random = ((double)std::rand() / RAND_MAX);
+  return random < exp(-diff / temp);
+}
+
 int main(int argc, char** argv) {
   std::srand(time(0));
   if (argc != 3) {
-    std::cout << "Usage: ./tetravex GRID_SIZE" << std::endl;
+    std::cout << "Usage: ./tetravex GRID_SIZE path/to/grid.grid" << std::endl;
     return 1;
   }
+
+  double T = 1.;
   size_t s = atoi(argv[1]);
-  auto g = read_grid(s, argv[2]);
+  auto g = read_grid(s, argv[2]).random_grid();
   g.print();
-  auto r = g.random_grid();
-  r.print();
-  std::cout << g.get_err() << std::endl;
-  std::cout << r.get_err() << std::endl;
+
+  auto err = g.get_err();
+  size_t i = 0;
+  while (err != 0) {
+    auto r = Grid(g);
+    r.swap_tetra();
+    auto nerr = r.get_err();
+    if (nerr < err || temp_test(T, err - nerr)) {
+      err = nerr;
+      g = r;
+      g.print();
+      T *= 0.99;
+    }
+    ++i;
+  }
+
+  std::cout << "Solution found in " << i << " iterations!" << std::endl;
   return 0;
 }

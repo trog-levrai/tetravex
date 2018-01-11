@@ -17,6 +17,7 @@ class Grid {
     void print() const;
     size_t get_err() const;
     Grid random_grid() const;
+    void swap_tetra();
 
   private:
     std::vector<std::vector<Tetra>> grid_;
