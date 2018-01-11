@@ -7,7 +7,7 @@ all:
 	$(CPP) $(CPPFLAGS) $(SRC) -o $(BIN)
 
 check: all
-	./$(BIN) 3
+	./$(BIN) 2 test/1.grid
 
 clean:
 	$(RM) $(BIN)
