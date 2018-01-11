@@ -40,3 +40,11 @@ size_t Grid::get_err() const {
   }
   return ans;
 }
+
+Grid Grid::random_grid() const {
+  auto ans = Grid(*this);
+  for (size_t i = 0; i < ans.grid_.size(); ++i)
+    std::random_shuffle(ans.grid_[i].begin(), ans.grid_[i].end());
+  std::random_shuffle(ans.grid_.begin(), ans.grid_.end());
+  return ans;
+}
