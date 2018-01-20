@@ -55,9 +55,9 @@ int main(int argc, char** argv) {
       g = r;
       T *= 0.9999;
       i = 0;
-    } else if (i >= 5000) {
+    } else if (i >= 2000) {
       //Temperature increase if stuck too long
-      T *= 50000.;
+      T = err * .15;
       i = 0;
     }
     ++i;
