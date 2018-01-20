@@ -1,5 +1,5 @@
 SRC=src/main.cc src/grid.cc
-CPPFLAGS=-g -std=c++14 -Wall -Wextra -Werror -Weffc++
+CPPFLAGS=-O3 -std=c++14 -Wall -Wextra -Werror -Weffc++
 BIN=tetravex
 CPP=g++
 
@@ -7,7 +7,7 @@ all:
 	$(CPP) $(CPPFLAGS) $(SRC) -o $(BIN)
 
 check: all
-	./$(BIN) 2 test/1.grid
+	./$(BIN) 3 test/2.grid
 
 clean:
 	$(RM) $(BIN)

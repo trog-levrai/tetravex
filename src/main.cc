@@ -33,7 +33,6 @@ int main(int argc, char** argv) {
   double T = 1.;
   size_t s = atoi(argv[1]);
   auto g = read_grid(s, argv[2]).random_grid();
-  g.print();
 
   auto err = g.get_err();
   size_t i = 0;
@@ -44,12 +43,13 @@ int main(int argc, char** argv) {
     if (nerr < err || temp_test(T, err - nerr)) {
       err = nerr;
       g = r;
-      g.print();
-      T *= 0.99;
+      T *= 0.995;
+      i = 0;
     }
-    ++i;
+    if (i++ == 5000) {
+      T *= 1.1;
+      i = 0;
+    }
   }
-
-  std::cout << "Solution found in " << i << " iterations!" << std::endl;
-  return 0;
+  g.print();
 }
